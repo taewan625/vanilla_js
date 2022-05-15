@@ -10,5 +10,10 @@ text type
 "hello"  :  " "를 이용해야 한다
 string 이라고 함 : 처음부터 끝까지 모두 글자로 이뤄진 것
 
-js 는 2가지 datatype을 가지고 있다. 
-1) integer,float 2) string  = 숫자 , 문자
+js 는 3가지 datatype을 가지고 있다. 
+1) integer,float 
+2) string  = 숫자 , 문자
+3)다른 datatype 으로 booleans = true,false  존재
+  값이 없는 null 존재
+  undefined
+  * null은 null이라고 써서 이것과 관련된 값이 없어요 하는 거고 undefined는 값 자체가 없는 것 = 비어있는 것
