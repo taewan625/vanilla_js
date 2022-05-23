@@ -1,12 +1,17 @@
-// Conditionals = 조건문 - 무엇인가를 확인할 때 사용  if
-
-//const age = prompt("How old are you");
-//// prompt : 사용자에게 창을 띄울 수 있도록 해줌 / 아주 옛날에 쓰던 것. 이것에 답하기 전까지 console.log를 일시정지 시켜줌
-
-//console.log(parseInt(age));
-////console.log(typeof variable) : console 창에 나온 값이 어떤 type인지 알려줌
-//// parseInt : string -> Inst 로 바꿔주는 function
+// 무엇이 NaN인지 판별하는 방법
 
 const age = parseInt(prompt("How old are you?"));
-// function은 inside -> outside
-console.log(age);
+// console.log(isNaN(age));
+//isNaN: number가 아니면 boolean으로 표시해주는 function -> inst :false string : true
+
+// if(condition){
+//   // condition == true
+// } else{
+//   // condition == false
+// }
+// // condition은 boolean으로 판별되야한다  else는 없어도 된다
+if (isNaN(age)) {
+  console.log("Please write a number");
+} else {
+  console.log("Thanks for writing your age");
+}
