@@ -17,3 +17,5 @@ js 는 3가지 datatype을 가지고 있다.
   값이 없는 null 존재
   undefined
   * null은 null이라고 써서 이것과 관련된 값이 없어요 하는 거고 undefined는 값 자체가 없는 것 = 비어있는 것
+
+object(객체) > properity(속성)
