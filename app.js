@@ -11,7 +11,8 @@ function handleTitleClick() {
 // handleTitleClick();
 
 // 밑에 click을 했을 때 위의 function으로 listen을 해줄 것임, 그리고 이를 적용해야하므로 밑의 argument에 넣어 줄 것임
-title.addEventListener("click", handleTitleClick);
+title.addEventListener("click", handleTitleClick); //function에 절대 ()넣지 말기
+//                     ( "어떤 event" , 어떤 listen의 function) ;
 // ##아주중요## (): 함수를 자동으로 실행한다는 의미 그래서 만약 handleTitleClick에 () 넣었으면 console 창에서 click을 안해도 title was clicked! 표시됨
 // ##아주중요## 그래서 () 빼주는 것임
 
