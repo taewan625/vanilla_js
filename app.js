@@ -1,29 +1,26 @@
-// browser console 에 document를 입력하면 현재 연결된 html file을 보여준다.  * 더 자세한 것은 console.dir(document) 입력
-// document: browser에 이미 존재하는 object이다 *html로 접근할 수 있는 객체
-// object 관점으로 보여주는 것이 중요한 이유는 document object로부터 title을 가지고 올 수 있기 때문
-// document.title 은 현재 html title을 보여주는 것이고 document.title = "###"로 title을 변경이 가능하다 -> html과 JS 는 상호호환되어 있다
-document.title = "momentum_can_change";
+// // 보통의 경우 id 보다 className을 사용한다
+// const title = document.getElementById("titleeeeeeeeeeee");
+// title.innerText = "Got you!!";
+// console.log(title.className);
 
-//mmgl com
-// browser console 에 document를 입력하면 현재 연결된 html file을 보여준다.  * 더 자세한 것은 console.dir(document) 입력
-// document: browser에 이미 존재하는 object이다 *html로 접근할 수 있는 객체
-// object 관점으로 보여주는 것이 중요한 이유는 document object로부터 title을 가지고 올 수 있기 때문
-// document.title 은 현재 html title을 보여주는 것이고 document.title = "###"로 title을 변경이 가능하다 -> html과 JS 는 상호호환되어 있다
-const title = document.getElementById("titleeeeeeeeeeee");
-// console.dir(title);
+// // app.js:3 Uncaught TypeError: Cannot set properties of null (setting 'innerText')  at app.js:3:17
+// // title이 존재하지 않으니 title의 내부의 innerText를 호출하지 마십시오
 
-title.innerText="Got you!!" // js를 이용해서 html file을 안건들이고 변경이 가능하다
+// // 사람들이 가장 많이 내는 에러. 여기서 null 이란 값이 나오는데 이는 title이 null이란 의미
+// // 이는 const title = document.getElementById("titleeeeeeeeeeee"); 에서 titleeeeeeeeeeee를 가진 id가 없기 때문
 
+// class를 이용하는 법 가르쳐 줄꺼임
+const hellos = document.getElementsByClassName("hello"); // ()이 안의 className은 html className과 같아야 한다
+console.log(hellos);
 
-//JS로 title의 id와 class 이름을 확인하는 방법
-console.log(title.id);
+// HTMLCollection(5) [h1.hello, h1.hello, h1.hello, h1.hello, h1.hello]
+// 0: h1.hello
+// 1: h1.hello
+// 2: h1.hello
+// 3: h1.hello
+// 4: h1.hello
+// length: 5
+// [[Prototype]]: HTMLCollection
 
-console.log(title.className);
-
-
-//  html에서 항목들을 가지고 와서, JS를 통해 항목들을 변경할 것
-// 개념이 중요: JS로 html 요소들을 찾아내면 그 후 JS를 이용해서 변경이 가능하다
-
-// html에서 항목들을 가지고 올수 있는 방법 2가지
-// 1) document에서 항목들을 가지고 오는 것
-// 2) document 항목들을 변경하는 것
+// 이런 결과가 나옴
+// h1의 값들은 array이기 때문에 hellos.## 로 가져올수 없다
