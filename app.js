@@ -1,20 +1,30 @@
-// 이렇게 JS에서 porperty(ex_blue) 를 변경가능하지만 JS는 event를 listen하는 것이 주 목적
-// event=click event: click or 무엇인가 위에 올려놓는 것도 event ex_h1위로 mouse 올리는 것
+// 1) JS에 HTML 가져오기
+const title = document.querySelector(".hello h1");
 
-const title = document.querySelector(".hello h1"); // querySelector는 element를 CSS 방식으로 검색할 수 있다
-
+// 3) event가 발생시 나타나는 function들
 function handleTitleClick() {
   title.style.color = "blue";
-  console.log("title was clicked!");
+  // console.log("title was clicked!");
 }
-//이것은 function을 실행하기 위한 것인데 바로 실행하지 않고 먼저 js로 가서 js가 실행하기 위해서 사라져야함
-// handleTitleClick();
 
-// 밑에 click을 했을 때 위의 function으로 listen을 해줄 것임, 그리고 이를 적용해야하므로 밑의 argument에 넣어 줄 것임
-title.addEventListener("click", handleTitleClick); //function에 절대 ()넣지 말기
-//                     ( "어떤 event" , 어떤 listen의 function) ;
-// ##아주중요## (): 함수를 자동으로 실행한다는 의미 그래서 만약 handleTitleClick에 () 넣었으면 console 창에서 click을 안해도 title was clicked! 표시됨
-// ##아주중요## 그래서 () 빼주는 것임
+function handleMouseEnter() {
+  title.innerText = "Mouse is here";
+}
 
-// addEventListener: event를 listen 하는 것 그중에서도 모든 event를 listen하는 것이 아니므로 click이란 것을 listen 할 것임
-// click이란 event를 하면 handleTtitleClick이란 listen을 하고 보니깐 이 listen은 function 이였고
+function handleMouseLeave() {
+  title.innerText = "Mouse is gone!";
+}
+
+// 2) event를 뭐할지 쓰기
+title.addEventListener("click", handleTitleClick);
+title.addEventListener("mouseenter", handleMouseEnter);
+title.addEventListener("mouseleave", handleMouseLeave);
+
+// listen 하고 싶은 event를 찾는 방법
+// 1.
+// h1 html element mdn  # 구글에 찾고 싶은 element 이름 searching
+// 그리고 Web APIs | MDN 찾기 # JS 관점의 HTML heading element란 의미
+//2.
+console.dir(title); // 안에 element를 넣음
+// 하고 cosole 창에서 내에서 property 중 on### 된것은 모두 event 이다.
+// 사용할 때는 on을 빼고 ""로 작성
