@@ -1,30 +1,41 @@
-// 1) JS에 HTML 가져오기
-const title = document.querySelector(".hello h1");
+const h1 = document.querySelector(".hello h1");
 
-// 3) event가 발생시 나타나는 function들
-function handleTitleClick() {
-  title.style.color = "blue";
-  // console.log("title was clicked!");
+function handleh1Click() {
+  h1.style.color = "blue";
 }
 
 function handleMouseEnter() {
-  title.innerText = "Mouse is here";
+  h1.innerText = "Mouse is here";
 }
 
 function handleMouseLeave() {
-  title.innerText = "Mouse is gone!";
+  h1.innerText = "Mouse is gone!";
 }
 
-// 2) event를 뭐할지 쓰기
-title.addEventListener("click", handleTitleClick);
-title.addEventListener("mouseenter", handleMouseEnter);
-title.addEventListener("mouseleave", handleMouseLeave);
+function handleWindowResize() {
+  document.body.style.backgroundColor = "tomato";
+  // document는 html을 뜻함. 그래서 나중에 document.title을 하면 h1의 내용이 아니라 head의 title을 가리키므로 title을 h1을 변경함
+  // body, head, title은 중요하기 때문에 document.title 는 가능하지만 다른 element들은 1줄 처럼 querySelector를 이용하거나 getElementById를 이용해야함
+}
 
-// listen 하고 싶은 event를 찾는 방법
-// 1.
-// h1 html element mdn  # 구글에 찾고 싶은 element 이름 searching
-// 그리고 Web APIs | MDN 찾기 # JS 관점의 HTML heading element란 의미
-//2.
-console.dir(title); // 안에 element를 넣음
-// 하고 cosole 창에서 내에서 property 중 on### 된것은 모두 event 이다.
-// 사용할 때는 on을 빼고 ""로 작성
+function handleWindowCopy() {
+  alert("coper!!");
+}
+
+function handleWindowOffline() {
+  alert("404Error_noWifi");
+}
+
+function handleWindowOnline() {
+  alert("connectedWifi");
+}
+// h1.addEventListener 은 나중에 h1.removeEventListener로 제거 가능해서 추천
+h1.addEventListener("click", handleh1Click); // smae : h1.onclick = handleh1Click;
+h1.addEventListener("mouseenter", handleMouseEnter);
+h1.addEventListener("mouseleave", handleMouseLeave);
+
+// window 관련 event들
+window.addEventListener("resize", handleWindowResize);
+window.addEventListener("copy", handleWindowCopy);
+window.addEventListener("offline", handleWindowOffline);
+window.addEventListener("online", handleWindowOnline);
