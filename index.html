@@ -8,10 +8,17 @@
     <title>momentum</title>
   </head>
   <body>
-    <div id="login-form">
-      <input type="text" placeholder="What is your name?" />
+    <!-- JS에서 username에 아무것도 안쓰고 15글자 이내로 할 수 있지만 HTML도 가능하므로 이를 활용하는 것이 중요하다
+    div를 form으로 바꾸어서 button을 누를때마다 값을 제출해주고 input 안에 required (무조건 값을 쓰게 함) maxlength를 넣어줌  -->
+    <form id="login-form">
+      <input
+        required
+        maxlength="15"
+        type="text"
+        placeholder="What is your name?"
+      />
       <button>Log In</button>
-    </div>
+    </form>
 
     <script src="app.js"></script>
   </body>
