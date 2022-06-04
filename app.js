@@ -1,19 +1,41 @@
 const loginForm = document.querySelector("#login-form");
 const loginInput = document.querySelector("#login-form input");
-const greeting = document.querySelector("#greeting"); // html h1 안에 greeting이란 id 넣고 변수 만듬
+const greeting = document.querySelector("#greeting");
 
-const HIDDEN_CLASSNAME = "hidden"; // 대문자로 하게 변수명을 지정하는 것은 관습적인 것, 그리고 별 중요하지 않은 것을 나타날때 사용
+// 반복되는 string의 오타는 JS가 error를 나타내지 않지만 변수명에 오타가 나면 JS는 error를 잡아줌
+const HIDDEN_CLASSNAME = "hidden";
+// 참고로 이때 hidden이 class 인데도 그냥 query를 사용하지 않아도 잘 작동됨
+const USERNAME_KEY = "username";
 
 function onLoginSubmit(event) {
   event.preventDefault();
-  loginForm.classList.add(HIDDEN_CLASSNAME); // hidden이란 class name을 더해줘서 form을 숨김
-  const username = loginInput.value; // user이름을 변수로 저장해서 그 이름을 h1 안에 넣을 것임
+  loginForm.classList.add(HIDDEN_CLASSNAME);
+  const username = loginInput.value;
 
-  localStorage.setItem("username", username);
-  // greeting.innerText = "hello" + username;
-  greeting.innerText = `hello ${username}`; // 둘다 변수를 string 안에서 사용할 수 있게 해줌
+  localStorage.setItem(USERNAME_KEY, username);
+  // greeting.innerText = `hello ${username}`;
+  // greeting.classList.remove(HIDDEN_CLASSNAME);
+  keepGreetingsPage(username);
+}
 
+// greeting이 반복되므로 function을 만들 것임
+function keepGreetingsPage(argumentUsername) {
+  greeting.innerText = `hello ${argumentUsername}`;
   greeting.classList.remove(HIDDEN_CLASSNAME);
 }
 
-loginForm.addEventListener("submit", onLoginSubmit);
+// getItem을 하였을 때 값이 없을 때의 value를 확인하가 위한 작업 = null
+const localStorageUserName = localStorage.getItem(USERNAME_KEY);
+// console.log(localStorageUserName);
+
+if (localStorageUserName === null) {
+  loginForm.classList.remove(HIDDEN_CLASSNAME);
+  loginForm.addEventListener("submit", onLoginSubmit);
+  // 이동함. if 조건을 충족할 때 위의 event와 function을 진행하기 위함
+} else {
+  // greeting.innerText = `hello ${localStorageUserName}`;
+  // // username을 하지 않는 이유는 먼저 form에 username을 작성하고 Value로 저장된
+  // //username을 사용해야 하므로 그에 맞는 변수인 localStorageUserName을 사용하는 것이 맞다
+  // greeting.classList.remove(HIDDEN_CLASSNAME);
+  keepGreetingsPage(localStorageUserName);
+}
