@@ -9,6 +9,7 @@ function onLoginSubmit(event) {
   loginForm.classList.add(HIDDEN_CLASSNAME); // hidden이란 class name을 더해줘서 form을 숨김
   const username = loginInput.value; // user이름을 변수로 저장해서 그 이름을 h1 안에 넣을 것임
 
+  localStorage.setItem("username", username);
   // greeting.innerText = "hello" + username;
   greeting.innerText = `hello ${username}`; // 둘다 변수를 string 안에서 사용할 수 있게 해줌
 
