@@ -1,26 +1,13 @@
-// Instance methods
-// new Date()
-// Mon Jun 06 2022 17:36:34 GMT+0900 (한국 표준시)
-
-//
-// undefined
-
-// const date = new Date();  이렇게 변수명을 지정해주는 것이 중요
-// undefined
-
-// date.getDate()
-// 6
-
-// date.getDay()
-// 1
-
 const clock = document.querySelector("h2#clock");
 
 function getClock() {
   const date = new Date();
-  // console.log(`${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`);
-  clock.innerText = `${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`; // html 로 나오게 clock(#id)의 innerText 이용
+  const hours = String(date.getHours()).padStart(2, "0"); // new Date()값은 number로 나와서 string을 원하는 padStrart에 맞게 변형
+  const minutes = String(date.getMinutes()).padStart(2, "0");
+  const seconds = String(date.getSeconds()).padStart(2, "0");
+  clock.innerText = `${hours}:${minutes}:${seconds}`;
 }
-
-getClock(); // reload 시 1초 안기다리고 바로 나오게 하려고 넣음
+getClock();
 setInterval(getClock, 1000);
+// A.padStrat(a=string의 길이, "b") : 초가 01 02 이렇게 되도록 하는 function -> A가 a의 조건에 맞지 않으면 앞에 "b"를 붙인다
+// padEnd는 뒤에 문자가 붙는 것
