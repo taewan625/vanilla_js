@@ -2,40 +2,39 @@ const loginForm = document.querySelector("#login-form");
 const loginInput = document.querySelector("#login-form input");
 const greeting = document.querySelector("#greeting");
 
-// 반복되는 string의 오타는 JS가 error를 나타내지 않지만 변수명에 오타가 나면 JS는 error를 잡아줌
 const HIDDEN_CLASSNAME = "hidden";
-// 참고로 이때 hidden이 class 인데도 그냥 query를 사용하지 않아도 잘 작동됨
 const USERNAME_KEY = "username";
+
+// 현재 keepGreetingPage의 argument들이 하나는 loginInput.value에서 오고 다른 하나는 localStorage에서 오고 있다
+// 그래서 keepGreetingsPage(username); keepGreetingsPage(localStorageUserName); 이렇게 2개로 나눠 써야 한다.
+// 헷갈리니깐 하나로 통일하자
+
+// keepGreetingsPage(argument)는 argument를 따로 받을 필요가 없다. 왜냐면 이미 localStorage.getItem 으로 username을 이미 받았기 때문
 
 function onLoginSubmit(event) {
   event.preventDefault();
   loginForm.classList.add(HIDDEN_CLASSNAME);
-  const username = loginInput.value;
-
-  localStorage.setItem(USERNAME_KEY, username);
-  // greeting.innerText = `hello ${username}`;
-  // greeting.classList.remove(HIDDEN_CLASSNAME);
-  keepGreetingsPage(username);
+  // const username = loginInput.value; // keepGreetings 인자 오는 위치 2
+  // localStorage.setItem(USERNAME_KEY, username); user 라는 이름으로 가져오는게 아니라 loginInput.value로 바로 가져올것임
+  localStorage.setItem(USERNAME_KEY, loginInput.value);
+  // keepGreetingsPage(username);
+  keepGreetingsPage(); //argument 받을 필요 없어서 지움
 }
 
-// greeting이 반복되므로 function을 만들 것임
-function keepGreetingsPage(argumentUsername) {
+// function keepGreetingsPage(argumentUsername) {
+function keepGreetingsPage() {
+  //argument 받을 필요 없어서 지움
+  const argumentUsername = localStorage.getItem(USERNAME_KEY); // 아래 `hello ${argumentUsername}`로 값을 받으니깐 변수 명을 argumentUsername로 해야함
   greeting.innerText = `hello ${argumentUsername}`;
   greeting.classList.remove(HIDDEN_CLASSNAME);
 }
 
-// getItem을 하였을 때 값이 없을 때의 value를 확인하가 위한 작업 = null
-const localStorageUserName = localStorage.getItem(USERNAME_KEY);
-// console.log(localStorageUserName);
+const localStorageUserName = localStorage.getItem(USERNAME_KEY); // keepGreetings 인자 오는 위치 1
 
 if (localStorageUserName === null) {
   loginForm.classList.remove(HIDDEN_CLASSNAME);
   loginForm.addEventListener("submit", onLoginSubmit);
-  // 이동함. if 조건을 충족할 때 위의 event와 function을 진행하기 위함
 } else {
-  // greeting.innerText = `hello ${localStorageUserName}`;
-  // // username을 하지 않는 이유는 먼저 form에 username을 작성하고 Value로 저장된
-  // //username을 사용해야 하므로 그에 맞는 변수인 localStorageUserName을 사용하는 것이 맞다
-  // greeting.classList.remove(HIDDEN_CLASSNAME);
-  keepGreetingsPage(localStorageUserName);
+  // keepGreetingsPage(localStorageUserName);
+  keepGreetingsPage(); //argument 받을 필요 없어서 지움
 }
