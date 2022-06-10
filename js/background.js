@@ -8,17 +8,10 @@ const images = [
 
 const chosenImage = images[Math.floor(Math.random() * images.length)];
 
-// console.log(chosenImage);
-
-// JS에서 무엇인가를 생성해서 html에 추가하는 방법
-
-const randomBgImage = document.createElement("img"); // JS에서 img를 만드는 과정
+const randomBgImage = document.createElement("img");
 randomBgImage.src = `img/${chosenImage}`;
-// 위의 코드는 img라는 tag를 만든 것이고 이제 나의 img를 넣을 것 src를 이용함
 
-console.log(randomBgImage); // img를 만든 것을 확인하기 위함
+console.log(randomBgImage);
 
 document.body.appendChild(randomBgImage);
-// 실제 html에는 img가 존재하지 않아서 만들어주는 과정
-
-//  createElement와 appendChild 설명 : https://yelee.tistory.com/14
+// prepend는 img를 body에서 제일 위로 올려주는 역할
