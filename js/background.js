@@ -11,7 +11,7 @@ const chosenImage = images[Math.floor(Math.random() * images.length)];
 const randomBgImage = document.createElement("img");
 randomBgImage.src = `img/${chosenImage}`;
 
-console.log(randomBgImage);
+// console.log(randomBgImage);
 
 document.body.appendChild(randomBgImage);
 // prepend는 img를 body에서 제일 위로 올려주는 역할
