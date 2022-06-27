@@ -1,18 +1,13 @@
 const toDoForm = document.getElementById("todo-form");
 const toDoList = document.getElementById("todo-list");
-const toDoInput = document.querySelector("#todo-form input"); // = toDoForm.querySelector("input");
+const toDoInput = document.querySelector("#todo-form input");
 
-// 먼저 todolist의 값들을 localStorage에 저장하고 새로고침 후 localStorage에서 저장한 값들을 불러와서 화면에 나타나게 하는 것
+const TODOS_KEY = "todos"; // provide from mistake
 
 const toDos = [];
-// browser에 저장하기 위한 localStorage를 이용하기전 array를 이용하는 방법
-// 하지만 이것은 localStorage에 들어가면 array로 표현이 안됨
 
 function saveToDos() {
-  // localStorage.setItem("todos", toDos); // 아직까지는 text로 저장되고 array로 저장이 안됨
-
   localStorage.setItem("todos", JSON.stringify(toDos));
-  // JSON.stringify() : browser의 기본 기능인데 이는 모든 것을 string으로 바꾸어줌
 }
 function deleteTodo(event) {
   const li = event.target.parentElement;
@@ -35,21 +30,50 @@ function handleToDoSubmit(event) {
   event.preventDefault();
   const newTodo = toDoInput.value;
   toDoInput.value = "";
-
   toDos.push(newTodo);
-  // paintToDo(newTodo) 하기전에 toDos에 push를 먼저 하고 싶은 것임
-
   paintToDo(newTodo);
-  saveToDos(); // 이 값을 넣어주고 나면 function saveToDos가 값을 저장하는데
+  saveToDos();
 }
 
 toDoForm.addEventListener("submit", handleToDoSubmit);
 
-// 왜 json.stringify 함수를 쓰나 했는데 나중에 json.parse 함수를 쓰더라구요
-// (STRINGIFY = 변수 등을 문자열로 바꿈,PARSE = 문자열을 JSON으로 바꿈)
-// localstorage 에서는 문자열밖에 저장할 수 있기 때문에
-// stringify로 Array 자체를 문자열로 만들고 (["뭐시기","저시기"] ==> "["뭐시기","저시기"]")
-// 나중에 localstorage에서 가지고 온 다음 parse로 문자열을 Array 로 만들어서
-// 불러들이는 걸로 하는거 같아요
-// 이상 뒷강의를 보지 않고 추측해본 뇌피셜
-// https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/JSON/parse
+// function sayHello(item) {
+//   // () 안에 아무것도 없으면 어떤 array에 작동했는지 확인이 안됨 그래서 넣어줌
+//   // item or element 로 이름은 정하기 나름
+//   console.log("각각 function이 작동을 하는지 확인", item);
+// }
+
+const savedToDos = localStorage.getItem(TODOS_KEY);
+// console.log(savedToDos); 이건 string으로 나오는 todos
+if (savedToDos !== null) {
+  const parsedToDos = JSON.parse(savedToDos);
+  // console.log(parsedToDos); 이건 array로 나오는 것 -> JS는 array에 있는 각각의 items에 대한 function을 실행 시켜줌
+  // parsedToDos.forEach(sayHello); // forEach는 array에 있는 각각의 item에 대해서 실행시켜줌
+  parsedToDos.forEach((item) =>
+    console.log("각각 function이 작동을 하는지 확인", item)
+  );
+  // function sayHello(item) 이랑 같은 것임. 아무거나 쓰면 됨 이것은 짧게 쓸수있고 기능적으로  function이랑 같아서 좋은것 같음
+}
+
+// JSON.parse() : string -> object로 변화시켜주는 것
+
+// JSON.stringify([1,2,3,4])
+// '[1,2,3,4]'
+// JSON.parse('[1,2,3,4]')
+// (4) [1, 2, 3, 4]
+// 0: 1
+// 1: 2
+// 2: 3
+// 3: 4
+// length: 4
+// [[Prototype]]: Array(0)
+
+// 그래서 이제 우리가 필요로 하는 todo list를 array로 변화 해볼것임
+
+// 원래 이렇게 나오는 것을
+// localStorage.getItem("todos")
+// '["a","b","n","b"]'
+
+//  JSON.parse를 이용해서 array로 변경시킴
+// JSON.parse(localStorage.getItem("todos"))
+// (4) ['a', 'b', 'n', 'b']
