@@ -6,12 +6,27 @@ const toDoInput = document.querySelector("#todo-form input");
 const TODOS_KEY = "todos";
 
 let toDos = [];
+
 function saveToDos() {
   localStorage.setItem("todos", JSON.stringify(toDos));
 }
+
 function deleteTodo(event) {
   const li = event.target.parentElement;
-  console.log(li.id);
+  li.remove();
+  toDos = toDos.filter((toDo) => toDo.id !== parseInt(li.id)); // 그래서 수치형으로 변경해 준다
+  // toDo는 toDos DB에 있는 요소 중 하나. toDo.id는 ;li.id에서 click 되지 않은 것이여야 한다
+  // 그리고 li.id가 string으로 나오는 이유
+
+  // 원인은 paintToDo 함수 내에 있는
+  // const li = document.createElement("li");
+  // li.id = newTodo.id;
+  //  이 부분 때문
+
+  // li는 DOM을 직접 건드린건데, mdn 문서 뒤져보니 DOM의 id는 문자열이라고 나옴
+  // 우리가 newTodo.id로 number를 넣어주었어도, DOM에선 string으로 형변환해서 받아들임
+  // mdn 문서 링크 공유 https://developer.mozilla.org/ko/docs/Web/API/Document/getElementById  // 매개변수 id 부분 보시면 설명 나옴
+  saveToDos(); // 이거 까지 해야지 delete 한 형식대로 저장을 해줌
 }
 
 function paintToDo(newTodo) {
@@ -43,16 +58,9 @@ function handleToDoSubmit(event) {
 toDoForm.addEventListener("submit", handleToDoSubmit);
 
 const savedToDos = localStorage.getItem(TODOS_KEY);
+
 if (savedToDos !== null) {
   const parsedToDos = JSON.parse(savedToDos);
   toDos = parsedToDos;
   parsedToDos.forEach(paintToDo);
-  // forEach는 paintToDo를 기본적으로 실행한다. 그리고 각각의 item을 주는데 이제 이 item은 object가 된다.
 }
-
-// .filer라는 함수를 이용하여 기본적으로 가진 array에서 noneeditem을 제외하고 새 array를 만드는 것. true를 default 값으로 true인 값들만 가져간다.
-// exemple
-// const arr = [1, 2, 3, 4, 5]
-// function sexyFunction(potato) {return potato <= 3}  // (anything ok, just meaning about arr's array)
-// arr.filter(sexyFunction)
-// [1, 2, 3]
